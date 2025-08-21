@@ -32,14 +32,29 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS','').split(',')
 
 # Application definition
 
-INSTALLED_APPS = [
+
+
+IN_BUILT_APPS  = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
+APPS = [
+    "crispy_forms",
+    "crispy_bootstrap4",
+]
+
+THIRD_PARTY_APPS = [
+
+]
+INSTALLED_APPS = IN_BUILT_APPS + APPS + THIRD_PARTY_APPS
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -121,6 +136,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
