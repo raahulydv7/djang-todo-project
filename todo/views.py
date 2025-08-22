@@ -4,7 +4,7 @@ from .forms import CusUserCreationForm,CusAuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 
-
+@login_required()
 def test_home(request):
     form = CusUserCreationForm()
     return render(request,'todo/home.html',{"form":form})
