@@ -1,0 +1,152 @@
+/* Global Reset */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Base Setup */
+html, body {
+    background-color: aliceblue;
+    color: black;
+    font-family: Arial, sans-serif;
+    height: 100%;
+}
+
+/* Navbar */
+.navbar {
+    width: 100%;
+    min-height: 60px;
+    background-color: lightblue;
+    color: black;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0; /* ensures consistent alignment */
+    padding: 0;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
+    transition: color 0.2s ease-in-out;
+}
+
+.navbar a:hover {
+    color: #003366; /* subtle hover effect */
+}
+
+/* Content Section */
+.content-div {
+    min-height: calc(100vh - 60px);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem; /* avoids card sticking to edges */
+}
+
+/* Card */
+.card {
+    
+    width: clamp(280px, 20vw, 400px); /* responsive width */
+    min-height: 45vh;
+    padding: 1.5rem;
+    background: white; /* makes shadow visible */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* ensures inputs stretch full width */
+    justify-content: center;
+    gap: 1rem; /* adds space between elements */
+}
+
+.card-header h1{
+    margin-bottom: 0.5rem;
+    color: #3399ff;
+
+}
+/* Form Groups */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    font-weight: bold;
+    color:  #9f9a9a;
+}
+
+input,
+select {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+/* Optional: Add a subtle focus effect */
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #3399ff;
+    box-shadow: 0 0 5px rgba(51, 153, 255, 0.5);
+}
+
+/* Error Message Text */
+.error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+.error-message li {
+    list-style: none;
+}
+
+/* Error Input Field */
+input.is-invalid,
+select.is-invalid {
+    border-color: red;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+
+/* buuton */
+
+button{
+    background-color: #3399ff;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-left: 3rem;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+button:active {
+    background-color: #00408a; /* Even darker on click */
+    transform: translateY(0); /* Remove lift on click */
+}
+
+button:disabled {
+    background-color: #ccc; /* Gray for disabled state */
+    cursor: not-allowed;
+}

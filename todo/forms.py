@@ -12,4 +12,4 @@ class CusUserCreationForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         for field in ['username','email','role','password1','password2']:
             self.fields[field].help_text = None
-            
+            self.fields[field].widget.attrs.update({'class': 'form-group'})
