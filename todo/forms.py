@@ -13,3 +13,15 @@ class CusUserCreationForm(UserCreationForm):
         for field in ['username','email','role','password1','password2']:
             self.fields[field].help_text = None
             self.fields[field].widget.attrs.update({'class': 'form-group'})
+
+
+class CusAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(
+        label="Username",
+        widget=forms.TextInput(attrs={'autofocus':True})
+    )
+    password = forms.CharField(
+        label="Password",
+        strip=False,
+        widget=forms.PasswordInput,
+    )

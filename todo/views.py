@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import CustomUser
-from .forms import CusUserCreationForm
+from .forms import CusUserCreationForm,CusAuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 
@@ -21,4 +21,15 @@ def register_user(request):
     return render(request,'todo/register.html',{"form":form})
 
 
+def login_user(request):
+    if request.method == 'POST':
+        form = CusAuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = CusAuthenticationForm() 
+    
+    return render(request, 'todo/login.html', {"form": form})
 
