@@ -43,13 +43,15 @@ IN_BUILT_APPS  = [
     'django.contrib.staticfiles',
 
 ]
+
 APPS = [
-    "crispy_forms",
-    "crispy_bootstrap4",
+    'users',
+    'todo',
 ]
 
 THIRD_PARTY_APPS = [
-
+    "crispy_forms",
+    "crispy_bootstrap4",
 ]
 INSTALLED_APPS = IN_BUILT_APPS + APPS + THIRD_PARTY_APPS
 
@@ -67,6 +69,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'todo_project.urls'
+AUTH_USER_MODEL = 'todo.CustomUser'
 
 TEMPLATES = [
     {
