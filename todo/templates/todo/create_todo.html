@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Create{% endblock title %}
+{% block content %}
+<div class="card">
+
+    {% if form.non_field_errors %}
+        <div class="error-message">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+
+    <div class="card-header">
+        <h1>Create Todo</h1>
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="error-message">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit">Add</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
