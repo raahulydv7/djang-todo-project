@@ -69,7 +69,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'todo_project.urls'
-AUTH_USER_MODEL = 'todo.CustomUser'
+AUTH_USER_MODEL = 'users.CustomUser'
 
 TEMPLATES = [
     {
