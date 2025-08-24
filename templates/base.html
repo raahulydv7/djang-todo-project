@@ -9,10 +9,22 @@
 </head>
 <body>
     <nav class="navbar">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-        </ul>
+        <div>
+            <ul>
+                <li><a href="#">Logo</a></li>
+            </ul>
+        </div>
+        <div>
+            <ul>
+                <li><a href="{% url "todos" %}">Todos</a></li>
+                <li><a href="{% url "create-todo" %}">Create</a></li>
+                {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
     </nav>
     <main class="content-div">
         {% block content %}{% endblock content %}

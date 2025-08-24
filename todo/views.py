@@ -3,6 +3,7 @@ from .models import Category,Todo
 from .forms import TodoForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from django.core.paginator import Paginator
 
 @login_required
 def todos(request):
@@ -27,8 +28,11 @@ def todos(request):
 
     categories = Category.objects.all()
 
+    paginator = Paginator(todos, 5)  
+    page_number = request.GET.get('page')
+    todos_page = paginator.get_page(page_number)
     return render(request, 'todo/todos.html', {
-        'todos': todos,
+        'todos': todos_page,
         'categories': categories,
         'selected_status': status,
         'selected_category': category_id,

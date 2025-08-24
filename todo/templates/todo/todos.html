@@ -71,5 +71,18 @@
             {% endfor %}
         </tbody>
     </table>
+    <div class="pagination">
+        {% if todos.has_previous %}
+            <a href="?page=1{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}">First</a>
+            <a href="?page={{ todos.previous_page_number }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}">Previous</a>
+        {% endif %}
+
+        <span>Page {{ todos.number }} of {{ todos.paginator.num_pages }}</span>
+
+        {% if todos.has_next %}
+            <a href="?page={{ todos.next_page_number }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}">Next</a>
+            <a href="?page={{ todos.paginator.num_pages }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}">Last</a>
+        {% endif %}
+    </div>
 </div>
 {% endblock content %}

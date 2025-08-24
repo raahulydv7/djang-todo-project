@@ -23,7 +23,7 @@ def login_user(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('todos')
+            return redirect('home')
     else:
         form = CusAuthenticationForm() 
     
