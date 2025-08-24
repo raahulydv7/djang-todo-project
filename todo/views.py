@@ -24,3 +24,4 @@ def add_todo(request):
     else:
         form = TodoForm()
     return render(request, 'todo/create_todo.html', {'form': form})
+
