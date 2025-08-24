@@ -3,7 +3,29 @@
 {% block content %}
 <div class="table-container">
     <table>
-        <caption>Todos</caption>
+        
+        <form method="get" class="filters">
+
+            <select name="status" onchange="this.form.submit()">
+                <option value="">All Status</option>
+                <option value="pending" {% if selected_status == 'pending' %}selected{% endif %}>Pending</option>
+                <option value="in_progress" {% if selected_status == 'in_progress' %}selected{% endif %}>In Progress</option>
+                <option value="completed" {% if selected_status == 'completed' %}selected{% endif %}>Completed</option>
+            </select>
+
+            <select name="category" onchange="this.form.submit()">
+                <option value="">All Categories</option>
+                {% for cat in categories %}
+                    <option value="{{ cat.id }}" {% if selected_category == cat.id|stringformat:"s" %}selected{% endif %}>
+                        {{ cat.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <input type="text" name="search" value="{{ request.GET.search }}" placeholder="Search by title">
+            <button type="submit">Filter</button>
+        </form>
+
+
         <thead>
             <tr>
                 <th>Title</th>
@@ -29,14 +51,14 @@
                 <td>{{ todo.due_date|date:"Y-m-d H:i" }}</td>
                 <td>{{ todo.created_at|date:"Y-m-d H:i" }}</td>
                 <td>
-                    <button type="submit" onclick="return confirm('Are you sure you want to delete this todo?');">
+                    <button type="submit" class="btn-danger" onclick="return confirm('Are you sure you want to delete this todo?');">
                             <a href="{% url 'update_todo' todo.slug %}">Update</a></td>
                         </button>
                     
                 <td>
                     <form action="{% url 'delete_todo' todo.slug %}" method="post">
                         {% csrf_token %}
-                        <button type="submit" onclick="return confirm('Are you sure you want to delete this todo?');">
+                        <button type="submit" class="btn-update" onclick="return confirm('Are you sure you want to delete this todo?');">
                             Delete
                         </button>
                     </form>

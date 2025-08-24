@@ -6,12 +6,33 @@ from django.views.decorators.http import require_POST
 
 @login_required
 def todos(request):
+    status = request.GET.get('status')
+    category_id = request.GET.get('category')
+    search_query = request.GET.get('search', '')
+
     if request.user.role == 'Admin':
         todos = Todo.objects.all()
     else:
         todos = Todo.objects.filter(user=request.user)
     
-    return render(request, 'todo/todos.html', {'todos': todos})
+    if status:
+        todos = todos.filter(status=status)
+    
+    if category_id:
+        todos = todos.filter(category_id=category_id)
+    
+    if search_query:
+        todos = todos.filter(title__icontains=search_query)
+    
+
+    categories = Category.objects.all()
+
+    return render(request, 'todo/todos.html', {
+        'todos': todos,
+        'categories': categories,
+        'selected_status': status,
+        'selected_category': category_id,
+    })
 
 @login_required
 def add_todo(request):
