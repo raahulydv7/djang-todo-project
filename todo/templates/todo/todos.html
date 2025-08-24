@@ -11,6 +11,7 @@
                 <th>Status</th>
                 <th>Due Date</th>
                 <th>Created At</th>
+                <th colspan="2">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -27,14 +28,15 @@
                 <td>{{ todo.status }}</td>
                 <td>{{ todo.due_date|date:"Y-m-d H:i" }}</td>
                 <td>{{ todo.created_at|date:"Y-m-d H:i" }}</td>
+                <td><a href="{% url 'update_todo' todo.slug %}">Update</a></td>
+                <td><a href="">Delete</a></td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="5" >No todos available.</td>
+                <td colspan="7">No todos available.</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
-
 {% endblock content %}

@@ -45,5 +45,11 @@ class Todo(models.Model):
             self.slug = unique_slug
         super().save(*args, **kwargs)
 
+    def title_change(self):
+        if self.pk:
+            old_title = Todo.objects.get(pk=self.pk).title
+            return old_title != self.title
+        return True
+    
     def __str__(self):
         return f"{self.title} ({self.status})"

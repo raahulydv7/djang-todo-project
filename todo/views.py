@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from .models import Category,Todo
 from .forms import TodoForm
 from django.contrib.auth.decorators import login_required
@@ -25,3 +25,20 @@ def add_todo(request):
         form = TodoForm()
     return render(request, 'todo/create_todo.html', {'form': form})
 
+
+@login_required
+def update_todo(request,slug):
+    todo = get_object_or_404(Todo,slug=slug)
+    
+    if todo.user != request.user and not request.user.is_superuser:
+        return redirect('todos')
+    
+    if request.method == 'POST':
+        form = TodoForm(request.POST,instance=todo)
+        if form.is_valid():
+            form.save()
+            return redirect('todos')
+        
+    else:
+        form = TodoForm(instance=todo)
+    return render(request, 'todo/update_todo.html', {'form': form})
