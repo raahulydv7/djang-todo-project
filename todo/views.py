@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect, get_object_or_404
 from .models import Category,Todo
 from .forms import TodoForm
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 
 @login_required
 def todos(request):
@@ -42,3 +43,11 @@ def update_todo(request,slug):
     else:
         form = TodoForm(instance=todo)
     return render(request, 'todo/update_todo.html', {'form': form})
+
+
+@login_required
+@require_POST
+def delete_todo(request,slug):
+    todo = get_object_or_404(Todo,slug=slug)
+    todo.delete()
+    return redirect('todos')
